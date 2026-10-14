@@ -12,4 +12,7 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Vercel sets VERCEL=1 during builds — emit the Vercel nitro preset there so
+  // the deploy is zero-config; other targets keep the cloudflare default.
+  ...(process.env.VERCEL ? { nitro: { preset: "vercel" } } : {}),
 });
